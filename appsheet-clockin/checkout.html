@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ออกงาน</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-card">
+    <header class="header brand-header">
+      <div class="brand-lockup">
+        <img src="assets/nik-group-logo.jpg" class="brand-logo" alt="NIK group">
+        <div>
+          <div class="brand-name">NIK group</div>
+          <div class="brand-page-title">ลงเวลาออกงาน</div>
+        </div>
+      </div>
+      <button class="header-icon-btn" onclick="loadHistoryTable('ออกงาน')" aria-label="รีเฟรชข้อมูล">↻</button>
+    </header>
+
+    <div class="table-container">
+      <table class="logs-table">
+        <thead>
+          <tr><th>NAME</th><th>check-out</th><th>เวลา</th><th>Location</th></tr>
+        </thead>
+        <tbody id="logsTableBody"></tbody>
+      </table>
+    </div>
+
+    <button class="fab-btn" onclick="openModal()" aria-label="เพิ่มรายการออกงาน">+</button>
+<!-- Bottom Navigation มีปุ่มกลับหน้าแรกเป็นปุ่มแรก -->
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span>🏠 หน้าแรก</span>
+      </a>
+      <a href="index.html" class="nav-item">
+        <span>📌 เข้างาน</span>
+      </a>
+      <a href="checkout.html" class="nav-item active">
+        <span>↔️ ออกงาน</span>
+      </a>
+      <a href="leave.html" class="nav-item">
+        <span>✋ ลางาน</span>
+      </a>
+      <a href="report.html" class="nav-item">
+        <span>📊 รายงาน</span>
+      </a>
+    </nav>
+  </div>
+
+  <div id="formModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">ออกงาน Form</div>
+      <div class="form-group">
+        <label>NAME*</label>
+        <select id="employeeName" class="input-field"><option value="">-- เลือกรายชื่อ --</option></select>
+      </div>
+      <div class="form-group">
+        <label>check-out</label>
+        <input type="date" id="checkOutDate" class="input-field">
+      </div>
+      <div class="form-group">
+        <label>เวลา</label>
+        <input type="time" id="checkOutTime" class="input-field">
+      </div>
+      <div class="form-group">
+        <label>ตำแหน่งที่ตั้ง (GPS)</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="locationCoords" class="input-field" placeholder="กำลังดึงพิกัด..." readonly style="background-color: #f9fafb;">
+          <button type="button" onclick="fetchLocation()" class="btn-cancel" style="white-space: nowrap; padding: 0 12px;">📍 รีเฟรช</button>
+        </div>
+      </div>
+      
+      <div id="status" class="status-msg"></div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-save" onclick="submitCheckOut()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=20260911-8"></script>
+  <script>
+    window.onload = async () => {
+      initFormDateTime('checkOutDate', 'checkOutTime');
+      await loadEmployees();
+      loadHistoryTable('ออกงาน');
+    };
+  </script>
+</body>
+</html>

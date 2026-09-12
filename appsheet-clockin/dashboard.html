@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - หน้าแรก</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-card">
+    <header class="header brand-header">
+      <div class="brand-lockup">
+        <img src="assets/nik-group-logo.jpg" class="brand-logo" alt="NIK group">
+        <div>
+          <div class="brand-name">NIK group</div>
+          <div class="brand-page-title">ระบบลงเวลาพนักงาน</div>
+        </div>
+      </div>
+      <span id="dashboard-date" class="current-date-badge">กำลังโหลดวันที่...</span>
+    </header>
+
+    <!-- Content Container -->
+    <div class="table-container" style="padding-bottom: 30px;">
+      
+      <!-- การ์ดสรุปตัวเลข (Stats Grid) -->
+      <div class="stats-grid">
+        <div class="stat-card card-checkin">
+          <div class="stat-icon">📌</div>
+          <div class="stat-info">
+            <span class="stat-label">เข้างานแล้ว</span>
+            <span class="stat-value" id="stat-checkin-count">0 คน</span>
+          </div>
+        </div>
+
+        <div class="stat-card card-checkout">
+          <div class="stat-icon">↔️</div>
+          <div class="stat-info">
+            <span class="stat-label">ออกงานแล้ว</span>
+            <span class="stat-value" id="stat-checkout-count">0 คน</span>
+          </div>
+        </div>
+
+        <div class="stat-card card-leave">
+          <div class="stat-icon">✋</div>
+          <div class="stat-info">
+            <span class="stat-label">ลางานวันนี้</span>
+            <span class="stat-value" id="stat-leave-count">0 คน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ปุ่มทางลัดไปยังหน้าอื่น (Quick Shortcuts) -->
+      <div class="dashboard-section" style="margin-bottom: 24px;">
+        <h4 style="margin-bottom: 12px; color: #334155;">เมนูด่วน / ทางลัด</h4>
+        <div class="shortcut-grid">
+          <a href="index.html" class="shortcut-btn btn-checkin">
+            <span class="shortcut-icon">↗</span>
+            <span>ลงเวลาเข้างาน</span>
+          </a>
+          <a href="checkout.html" class="shortcut-btn btn-checkout">
+            <span class="shortcut-icon">↘</span>
+            <span>ลงเวลาออกงาน</span>
+          </a>
+          <a href="leave.html" class="shortcut-btn btn-leave">
+            <span class="shortcut-icon">☼</span>
+            <span>ยื่นใบลา</span>
+          </a>
+          <a href="report.html" class="shortcut-btn btn-report">
+            <span class="shortcut-icon">▥</span>
+            <span>รายงานประจำเดือน</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- รายชื่อพนักงานที่ลงเวลาวันนี้ -->
+      <div class="dashboard-section">
+        <h4 style="margin-bottom: 12px; color: #334155;">รายการลงเวลาประจำวันนี้</h4>
+        <table class="logs-table">
+          <thead>
+            <tr>
+              <th>พนักงาน</th>
+              <th>สถานะ</th>
+              <th>เวลา / รายละเอียด</th>
+            </tr>
+          </thead>
+          <tbody id="today-logs-body">
+            <tr><td colspan="3" style="text-align:center; color:#888;">กำลังโหลดข้อมูล...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    
+
+  <script src="script.js?v=20260911-8"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลางาน</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-card">
+    <header class="header brand-header">
+      <div class="brand-lockup">
+        <img src="assets/nik-group-logo.jpg" class="brand-logo" alt="NIK group">
+        <div>
+          <div class="brand-name">NIK group</div>
+          <div class="brand-page-title">แจ้งลางาน</div>
+        </div>
+      </div>
+      <button class="header-icon-btn" onclick="loadHistoryTable('ลางาน')" aria-label="รีเฟรชข้อมูล">↻</button>
+    </header>
+
+    <div class="table-container">
+      <table class="logs-table">
+        <thead>
+          <tr><th>NAME</th><th>วันที่</th><th>สาเหตุที่ลา</th></tr>
+        </thead>
+        <tbody id="logsTableBody"></tbody>
+      </table>
+    </div>
+
+    <button class="fab-btn" onclick="openModal()" aria-label="เพิ่มรายการลา">+</button>
+
+   <!-- Bottom Navigation มีปุ่มกลับหน้าแรกเป็นปุ่มแรก -->
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span>🏠 หน้าแรก</span>
+      </a>
+      <a href="index.html" class="nav-item">
+        <span>📌 เข้างาน</span>
+      </a>
+      <a href="checkout.html" class="nav-item">
+        <span>↔️ ออกงาน</span>
+      </a>
+      <a href="leave.html" class="nav-item active">
+        <span>✋ ลางาน</span>
+      </a>
+      <a href="report.html" class="nav-item">
+        <span>📊 รายงาน</span>
+      </a>
+    </nav>
+  </div>
+
+  <div id="formModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">ลางาน Form</div>
+      <div class="form-group">
+        <label>NAME*</label>
+        <select id="employeeName" class="input-field"><option value="">-- เลือกรายชื่อ --</option></select>
+      </div>
+      <div class="form-group">
+        <label>วันที่*</label>
+        <input type="date" id="leaveDate" class="input-field">
+      </div>
+
+      <!-- ส่วนตัวเลือกสาเหตุที่ลาแบบ Radio Button -->
+      <div class="form-group">
+        <label style="margin-bottom: 10px;">สาเหตุที่ลา / နားရတဲ့အကြောင်းပြချက်*</label>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+          <label style="font-weight: normal; cursor: pointer; display: flex; align-items: flex-start; gap: 8px;">
+            <input type="radio" name="leaveReasonOption" value="ลาป่วย/နေမကောင်းလို့နားခြင်း" style="margin-top: 3px;" checked>
+            <span>ลาป่วย/နေမကောင်းလို့နားခြင်း</span>
+          </label>
+          <label style="font-weight: normal; cursor: pointer; display: flex; align-items: flex-start; gap: 8px;">
+            <input type="radio" name="leaveReasonOption" value="ลากิจ/အကြောင်းကိစ္စရှိလို့နားခြင်း" style="margin-top: 3px;">
+            <span>ลากิจ/အကြောင်းကိစ္စရှိလို့နားခြင်း</span>
+          </label>
+          <label style="font-weight: normal; cursor: pointer; display: flex; align-items: flex-start; gap: 8px;">
+            <input type="radio" name="leaveReasonOption" value="ลาครึ่งวันเช้า/နေ့တစ်ဝက်နားခြင်း (မနက်ပိုင်း)" style="margin-top: 3px;">
+            <span>ลาครึ่งวันเช้า/နေ့တစ်ဝက်နားခြင်း (မနက်ပိုင်း)</span>
+          </label>
+          <label style="font-weight: normal; cursor: pointer; display: flex; align-items: flex-start; gap: 8px;">
+            <input type="radio" name="leaveReasonOption" value="ลาครึ่งวันบ่าย/နေ့တစ်ဝက်နားခြင်း (ညနေပိုင်း)" style="margin-top: 3px;">
+            <span>ลาครึ่งวันบ่าย/နေ့တစ်ဝက်နားခြင်း (ညနေပိုင်း)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>หมายเหตุ</label>
+        <input type="text" id="leaveNote" class="input-field">
+      </div>
+      
+      <div id="status" class="status-msg"></div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-save" onclick="submitLeave()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=20260911-8"></script>
+  <script>
+    window.onload = async () => {
+      document.getElementById('leaveDate').value = getLocalDateInputValue();
+      await loadEmployees();
+      loadHistoryTable('ลางาน');
+    };
+  </script>
+</body>
+</html>

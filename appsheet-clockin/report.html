@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สรุปรายงานประจำเดือน</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-section {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 15px 20px;
+      background: #fafafa;
+      border-bottom: 1px solid #e8eaed;
+    }
+    .badge-checkin { color: #2e7d32; font-weight: bold; font-size: 1.05rem; }
+    .badge-leave { color: #d32f2f; font-weight: bold; font-size: 1.05rem; }
+  </style>
+</head>
+<body>
+  <div class="app-card">
+    <header class="header brand-header">
+      <div class="brand-lockup">
+        <img src="assets/nik-group-logo.jpg" class="brand-logo" alt="NIK group">
+        <div>
+          <div class="brand-name">NIK group</div>
+          <div class="brand-page-title">รายงานการลงเวลา</div>
+        </div>
+      </div>
+      <button class="header-icon-btn" onclick="generateMonthlyReport()" aria-label="รีเฟรชรายงาน">↻</button>
+    </header>
+
+    <!-- ส่วนเลือกเดือนและปี -->
+    <div class="filter-section">
+      <label style="font-weight: 600; font-size: 0.9rem;">เลือกเดือน:</label>
+      <input type="month" id="reportMonth" class="input-field" style="max-width: 200px;" onchange="generateMonthlyReport()">
+    </div>
+
+    <div class="table-container">
+      <table class="logs-table">
+        <thead>
+          <tr>
+            <th>รายชื่อพนักงาน</th>
+            <th style="text-align: center;">มาทำงาน (วัน)</th>
+            <th style="text-align: center;">จำนวนวันลา (วัน)</th>
+          </tr>
+        </thead>
+        <tbody id="reportTableBody">
+          <tr><td colspan="3" style="text-align:center; color:#888;">กำลังโหลดข้อมูล...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bottom Navigation มีปุ่มกลับหน้าแรกเป็นปุ่มแรก -->
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span>🏠 หน้าแรก</span>
+      </a>
+      <a href="index.html" class="nav-item">
+        <span>📌 เข้างาน</span>
+      </a>
+      <a href="checkout.html" class="nav-item">
+        <span>↔️ ออกงาน</span>
+      </a>
+      <a href="leave.html" class="nav-item">
+        <span>✋ ลางาน</span>
+      </a>
+      <a href="report.html" class="nav-item active">
+        <span>📊 รายงาน</span>
+      </a>
+    </nav>
+  </div>
+
+  <script src="script.js?v=20260911-8"></script>
+  <script>
+    window.onload = () => {
+      const today = new Date();
+      const currentMonth = getLocalDateInputValue(today).slice(0, 7);
+      document.getElementById('reportMonth').value = currentMonth;
+      generateMonthlyReport();
+    };
+  </script>
+</body>
+</html>
